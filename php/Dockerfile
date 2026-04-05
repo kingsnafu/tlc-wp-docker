@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y \
     libzip-dev \
     libicu-dev \
     libonig-dev \
+    libmagickwand-dev \
     unzip \
     curl \
   && docker-php-ext-configure gd \

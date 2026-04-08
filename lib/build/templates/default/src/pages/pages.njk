@@ -1,0 +1,11 @@
+---
+pagination:
+  data: pages
+  size: 1
+  alias: page
+permalink: "/{{ page.slug }}/index.html"
+eleventyComputed:
+  title: "{{ page.title }}"
+layout: page.njk
+---
+{{ page.content | safe }}

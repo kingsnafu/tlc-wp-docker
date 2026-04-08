@@ -1,0 +1,40 @@
+# wp-to-static site configuration
+# Copy to site-config.yaml and fill in your values
+
+site:
+  name: "My Site"
+  url: "https://example.com"
+  tagline: "A great site"
+
+wordpress:
+  url: "http://localhost:8080"        # Internal crawl port
+  container: "mysite-db"              # Docker DB container name
+  db_user: "wpuser"
+  db_password: "changeme"
+  db_name: "wordpress"
+  table_prefix: "wp_"
+
+theme:
+  colors:
+    primary: "#1a1a2e"
+    secondary: "#e94560"
+    accent: "#0f3460"
+  fonts:
+    heading: "Playfair Display"
+    body: "Open Sans"
+
+cloudflare:
+  project_name: "my-static-site"
+  account_id: ""                      # Cloudflare account ID
+  api_token: ""                       # Or set env: CF_API_TOKEN
+
+# Optional — enables tlc-events calendar integration
+# calendar:
+#   widget_url: "https://events.example.com/widget.js"
+#   api_url: "https://events.example.com/api"
+
+# Plugin extractors — auto-detected, but can override here
+# plugins:
+#   tec_events: true
+#   gravity_forms: true
+#   yoast: true

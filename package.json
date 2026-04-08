@@ -1,0 +1,22 @@
+{
+  "name": "wp-to-static",
+  "version": "1.0.0",
+  "description": "Extract WordPress content and generate static sites via Eleventy, deploy to Cloudflare Pages",
+  "type": "module",
+  "bin": {
+    "wp-to-static": "./bin/wp-to-static.js"
+  },
+  "scripts": {
+    "audit": "node bin/wp-to-static.js audit",
+    "extract": "node bin/wp-to-static.js extract",
+    "build": "node bin/wp-to-static.js build",
+    "deploy": "node bin/wp-to-static.js deploy",
+    "start": "node bin/wp-to-static.js run"
+  },
+  "dependencies": {
+    "@11ty/eleventy": "^3.0.0",
+    "gray-matter": "^4.0.3",
+    "js-yaml": "^4.1.0",
+    "turndown": "^7.2.0"
+  }
+}

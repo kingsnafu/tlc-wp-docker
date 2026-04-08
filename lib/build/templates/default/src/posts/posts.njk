@@ -1,0 +1,14 @@
+---
+pagination:
+  data: posts
+  size: 1
+  alias: post
+permalink: "/blog/{{ post.slug }}/index.html"
+eleventyComputed:
+  title: "{{ post.title }}"
+  date: "{{ post.date }}"
+  categories: "{{ post.categories }}"
+  featured_image: "{{ post.featured_image }}"
+layout: post.njk
+---
+{{ post.content | safe }}

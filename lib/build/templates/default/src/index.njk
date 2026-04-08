@@ -1,0 +1,28 @@
+---
+layout: base.njk
+title: Home
+---
+{% set homePage = pages | selectattr("slug", "equalto", "home") | first %}
+{% if not homePage %}
+  {% set homePage = pages | selectattr("slug", "equalto", "front-page") | first %}
+{% endif %}
+{% if not homePage %}
+  {% set homePage = pages | first %}
+{% endif %}
+
+{% if homePage %}
+  <article>
+    <h1>{{ homePage.title }}</h1>
+    {{ homePage.content | safe }}
+  </article>
+{% else %}
+  <h1>{{ site.name }}</h1>
+  <p>{{ site.tagline }}</p>
+{% endif %}
+
+{% if site.calendar %}
+<section id="calendar">
+  <h2>Upcoming Events</h2>
+  <div id="tlc-events-widget"></div>
+</section>
+{% endif %}

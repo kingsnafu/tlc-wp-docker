@@ -1,0 +1,33 @@
+---
+layout: base.njk
+title: Blog
+pagination:
+  data: posts
+  size: 10
+  alias: paginatedPosts
+permalink: "{% if pagination.pageNumber == 0 %}/blog/{% else %}/blog/page/{{ pagination.pageNumber + 1 }}/{% endif %}"
+---
+<h1>Blog</h1>
+
+<ul class="post-list">
+{% for post in paginatedPosts %}
+  <li>
+    <p class="post-meta">
+      <time datetime="{{ post.date }}">{{ post.date | dateFormat("short") }}</time>
+      {% if post.categories %}
+        &mdash; {{ post.categories | join(", ") }}
+      {% endif %}
+    </p>
+    <h2><a href="/blog/{{ post.slug }}/">{{ post.title }}</a></h2>
+    {% if post.excerpt %}<p>{{ post.excerpt }}</p>{% endif %}
+  </li>
+{% endfor %}
+</ul>
+
+{% if pagination.pages.length > 1 %}
+<nav class="pagination">
+  {% if pagination.href.previous %}<a href="{{ pagination.href.previous }}">&laquo; Newer</a>{% endif %}
+  <span>Page {{ pagination.pageNumber + 1 }} of {{ pagination.pages.length }}</span>
+  {% if pagination.href.next %}<a href="{{ pagination.href.next }}">Older &raquo;</a>{% endif %}
+</nav>
+{% endif %}

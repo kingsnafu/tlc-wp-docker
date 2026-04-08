@@ -1,0 +1,21 @@
+---
+layout: base.njk
+---
+<article class="post">
+  <header>
+    <h1>{{ title }}</h1>
+    <p class="post-meta">
+      <time datetime="{{ date }}">{{ date | dateFormat("long") }}</time>
+      {% if categories %}
+        &mdash;
+        {% for cat in categories %}
+          <span class="category">{{ cat }}</span>{% if not loop.last %}, {% endif %}
+        {% endfor %}
+      {% endif %}
+    </p>
+  </header>
+  {% if featured_image %}
+  <img src="/images/{{ featured_image }}" alt="{{ title }}" class="featured-image">
+  {% endif %}
+  {{ content | safe }}
+</article>

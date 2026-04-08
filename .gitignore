@@ -2,3 +2,11 @@
 wordpress/
 dumps/
 repomix-output.md
+
+# wp-to-static
+node_modules/
+_site/
+content/
+data/
+images/
+site-config.yaml

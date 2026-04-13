@@ -7,8 +7,7 @@ permalink: "/blog/{{ post.slug }}/index.html"
 eleventyComputed:
   title: "{{ post.title }}"
   date: "{{ post.date }}"
-  categories: "{{ post.categories }}"
-  featured_image: "{{ post.featured_image }}"
+  seo_description: "{{ post.seo_description }}"
 layout: post.njk
 ---
 {{ post.content | safe }}

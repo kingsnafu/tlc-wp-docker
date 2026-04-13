@@ -6,16 +6,16 @@ layout: base.njk
     <h1>{{ title }}</h1>
     <p class="post-meta">
       <time datetime="{{ date }}">{{ date | dateFormat("long") }}</time>
-      {% if categories %}
+      {% if post.categories %}
         &mdash;
-        {% for cat in categories %}
+        {% for cat in post.categories %}
           <span class="category">{{ cat }}</span>{% if not loop.last %}, {% endif %}
         {% endfor %}
       {% endif %}
     </p>
   </header>
-  {% if featured_image %}
-  <img src="/images/{{ featured_image }}" alt="{{ title }}" class="featured-image">
+  {% if post.featured_image %}
+  <img src="/images/{{ post.featured_image }}" alt="{{ title }}" class="featured-image">
   {% endif %}
   {{ content | safe }}
 </article>

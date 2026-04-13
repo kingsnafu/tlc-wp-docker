@@ -10,3 +10,5 @@ content/
 data/
 images/
 site-config.yaml
+/src/
+/eleventy.config.js

@@ -5,7 +5,7 @@ layout: base.njk
   <header>
     <h1>{{ title }}</h1>
     <p class="post-meta">
-      <time datetime="{{ date }}">{{ date | dateFormat("long") }}</time>
+      <time datetime="{{ post.date }}">{{ post.date | dateFormat("long") }}</time>
       {% if post.categories %}
         &mdash;
         {% for cat in post.categories %}

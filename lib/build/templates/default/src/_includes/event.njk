@@ -21,6 +21,19 @@ layout: base.njk
   <img src="/images/{{ event.image }}" alt="{{ title }}" class="event-image">
   {% endif %}
   {{ content | safe }}
+  {% if event.venue %}
+  <div class="event-venue">
+    <h3>Venue</h3>
+    <p>{{ event.venue.name }}{% if event.venue.address %}<br>{{ event.venue.address }}{% endif %}{% if event.venue.city %}, {{ event.venue.city }}{% endif %}{% if event.venue.state %} {{ event.venue.state }}{% endif %}{% if event.venue.zip %} {{ event.venue.zip }}{% endif %}</p>
+    {% if event.venue.phone %}<p>{{ event.venue.phone }}</p>{% endif %}
+  </div>
+  {% endif %}
+  {% if event.organizer %}
+  <div class="event-organizer">
+    <h3>Organizer</h3>
+    <p>{{ event.organizer.name }}</p>
+  </div>
+  {% endif %}
   {% if event.ticket_url %}
   <p><a href="{{ event.ticket_url }}" class="ticket-link" target="_blank" rel="noopener">Get Tickets</a></p>
   {% endif %}

@@ -9,4 +9,4 @@ eleventyComputed:
   seo_description: "{{ event.seo_description | safe }}"
 layout: event.njk
 ---
-{{ event.content | safe }}
+{{ event.content | markdown | safe }}

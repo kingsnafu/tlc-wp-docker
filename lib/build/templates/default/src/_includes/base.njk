@@ -1,10 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ site.lang or 'en' }}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}{{ title }}{% endblock %} | {{ site.name }}</title>
   {% if seo_description %}<meta name="description" content="{{ seo_description | e }}">{% endif %}
+  {% set pageTitle = title + ' | ' + site.name %}
+  {% set pageDesc = seo_description or site.tagline or '' %}
+  <meta property="og:title" content="{{ pageTitle | e }}">
+  <meta property="og:type" content="website">
+  {% if pageDesc %}<meta property="og:description" content="{{ pageDesc | e }}">{% endif %}
+  {% if site.url %}<meta property="og:url" content="{{ (site.url ~ page.url) | e }}">{% endif %}
+  {% if site.name %}<meta property="og:site_name" content="{{ site.name | e }}">{% endif %}
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="{{ pageTitle | e }}">
+  {% if pageDesc %}<meta name="twitter:description" content="{{ pageDesc | e }}">{% endif %}
+  <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="stylesheet" href="/css/site.css">
   {% if site.theme.fonts %}
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,5 +41,6 @@
   {% if site.calendar %}
   <script src="{{ site.calendar.widget_url }}" data-api="{{ site.calendar.api_url }}" defer></script>
   {% endif %}
+  <script src="/js/form-handler.js" defer></script>
 </body>
 </html>

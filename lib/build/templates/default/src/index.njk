@@ -2,9 +2,9 @@
 layout: base.njk
 title: Home
 ---
-{% set homePage = pages | selectattr("slug", "equalto", "home") | first %}
+{% set homePage = pages | selectattr("is_front_page") | first %}
 {% if not homePage %}
-  {% set homePage = pages | selectattr("slug", "equalto", "front-page") | first %}
+  {% set homePage = pages | selectattr("slug", "equalto", "home") | first %}
 {% endif %}
 {% if not homePage %}
   {% set homePage = pages | first %}
@@ -13,7 +13,7 @@ title: Home
 {% if homePage %}
   <article>
     <h1>{{ homePage.title }}</h1>
-    {{ homePage.content | safe }}
+    {{ homePage.content | markdown | safe }}
   </article>
 {% else %}
   <h1>{{ site.name }}</h1>

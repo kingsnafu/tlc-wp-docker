@@ -1,0 +1,25 @@
+# Form handler Worker — wrangler.toml template
+#
+# Deploy: wrangler deploy
+# Dev:    wrangler dev
+#
+# Set secrets via:  wrangler secret put MAILGUN_API_KEY
+#                   wrangler secret put MAILGUN_DOMAIN
+#                   wrangler secret put TURNSTILE_SECRET  (optional)
+
+name = "form-handler"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+
+[vars]
+FROM_EMAIL = "noreply@example.com"
+TO_EMAIL = "you@example.com"
+SITE_NAME = "My Website"
+ALLOWED_ORIGINS = "https://example.com,https://www.example.com"
+# TURNSTILE_SECRET — set as a secret, not a var
+
+# Uncomment for custom domain routing:
+# [routes]
+# routes = [
+#   { pattern = "forms.example.com/*", zone_name = "example.com" }
+# ]

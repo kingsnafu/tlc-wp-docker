@@ -1,7 +1,15 @@
-{# Renders a Gravity Form definition as HTML form #}
-{% macro renderForm(form, action) %}
-<form class="gform" action="{{ action or '#' }}" method="POST">
+{# Renders a Gravity Form definition as an async-submit HTML form #}
+{% macro renderForm(form, workerUrl) %}
+{% set formAction = workerUrl or '#' %}
+<form class="gform" data-form-handler="{{ formAction }}" data-form-name="{{ form.title }}">
   <h2>{{ form.title }}</h2>
+  {# Honeypot — hidden from real users, catches bots #}
+  <div style="position:absolute;left:-9999px" aria-hidden="true">
+    <input type="text" name="_honeypot" tabindex="-1" autocomplete="off">
+  </div>
+  <input type="hidden" name="_formName" value="{{ form.title }}">
+  <input type="hidden" name="_formId" value="{{ form.id }}">
+
   {% for field in form.fields %}
     {% if field.type == 'section' %}
       <hr>
@@ -17,12 +25,12 @@
         </label>
 
         {% if field.type == 'textarea' %}
-          <textarea id="field_{{ form.id }}_{{ field.id }}" name="input_{{ field.id }}"
+          <textarea id="field_{{ form.id }}_{{ field.id }}" name="{{ field.label | lower | replace(' ', '_') }}"
             {% if field.placeholder %}placeholder="{{ field.placeholder }}"{% endif %}
             {% if field.required %}required{% endif %}></textarea>
 
         {% elif field.type == 'select' %}
-          <select id="field_{{ form.id }}_{{ field.id }}" name="input_{{ field.id }}"
+          <select id="field_{{ form.id }}_{{ field.id }}" name="{{ field.label | lower | replace(' ', '_') }}"
             {% if field.required %}required{% endif %}>
             <option value="">{{ field.placeholder or 'Select...' }}</option>
             {% for choice in field.choices %}
@@ -33,7 +41,7 @@
         {% elif field.type == 'radio' %}
           {% for choice in field.choices %}
             <label class="radio-label">
-              <input type="radio" name="input_{{ field.id }}" value="{{ choice.value }}"
+              <input type="radio" name="{{ field.label | lower | replace(' ', '_') }}" value="{{ choice.value }}"
                 {% if field.required and loop.first %}required{% endif %}>
               {{ choice.text }}
             </label>
@@ -42,7 +50,7 @@
         {% elif field.type == 'checkbox' %}
           {% for choice in field.choices %}
             <label class="checkbox-label">
-              <input type="checkbox" name="input_{{ field.id }}[]" value="{{ choice.value }}">
+              <input type="checkbox" name="{{ field.label | lower | replace(' ', '_') }}[]" value="{{ choice.value }}">
               {{ choice.text }}
             </label>
           {% endfor %}
@@ -51,12 +59,12 @@
           {% for input in field.inputs %}
             <div class="sub-field">
               <label for="field_{{ form.id }}_{{ input.id }}">{{ input.label }}</label>
-              <input type="text" id="field_{{ form.id }}_{{ input.id }}" name="input_{{ input.id }}">
+              <input type="text" id="field_{{ form.id }}_{{ input.id }}" name="{{ input.label | lower | replace(' ', '_') }}">
             </div>
           {% endfor %}
 
         {% else %}
-          <input type="{{ field.type }}" id="field_{{ form.id }}_{{ field.id }}" name="input_{{ field.id }}"
+          <input type="{{ field.type }}" id="field_{{ form.id }}_{{ field.id }}" name="{{ field.label | lower | replace(' ', '_') }}"
             {% if field.placeholder %}placeholder="{{ field.placeholder }}"{% endif %}
             {% if field.required %}required{% endif %}
             {% if field.maxLength %}maxlength="{{ field.maxLength }}"{% endif %}>
@@ -65,5 +73,6 @@
     {% endif %}
   {% endfor %}
   <button type="submit" class="gform-submit">Submit</button>
+  <div class="gform-status" aria-live="polite"></div>
 </form>
 {% endmacro %}

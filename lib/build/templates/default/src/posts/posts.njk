@@ -5,8 +5,8 @@ pagination:
   alias: post
 permalink: "/blog/{{ post.slug }}/index.html"
 eleventyComputed:
-  title: "{{ post.title }}"
-  seo_description: "{{ post.seo_description }}"
+  title: "{{ post.title | safe }}"
+  seo_description: "{{ post.seo_description | safe }}"
 layout: post.njk
 ---
 {{ post.content | safe }}

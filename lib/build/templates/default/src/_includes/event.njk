@@ -1,0 +1,27 @@
+---
+layout: base.njk
+---
+<article class="event">
+  <header>
+    <h1>{{ title }}</h1>
+    <p class="event-meta">
+      {% if event.date %}<time datetime="{{ event.date | dateFormat }}">{{ event.date | dateFormat("long") }}</time>{% endif %}
+      {% if event.time %} at {{ event.time }}{% endif %}
+      {% if event.end_time %} – {{ event.end_time }}{% endif %}
+    </p>
+    {% if event.categories %}
+    <p class="event-categories">
+      {% for cat in event.categories %}
+        <span class="category">{{ cat }}</span>{% if not loop.last %}, {% endif %}
+      {% endfor %}
+    </p>
+    {% endif %}
+  </header>
+  {% if event.image %}
+  <img src="/images/{{ event.image }}" alt="{{ title }}" class="event-image">
+  {% endif %}
+  {{ content | safe }}
+  {% if event.ticket_url %}
+  <p><a href="{{ event.ticket_url }}" class="ticket-link" target="_blank" rel="noopener">Get Tickets</a></p>
+  {% endif %}
+</article>

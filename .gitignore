@@ -10,5 +10,7 @@ content/
 data/
 images/
 site-config.yaml
-/src/
-/eleventy.config.js
+# src/ and eleventy.config.js are scaffolded per-site — don't commit them
+# But do NOT gitignore src/ because Eleventy uses .gitignore to skip files
+#/src/
+#/eleventy.config.js

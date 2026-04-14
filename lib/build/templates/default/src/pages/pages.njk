@@ -5,8 +5,8 @@ pagination:
   alias: page
 permalink: "/{{ page.slug }}/index.html"
 eleventyComputed:
-  title: "{{ page.title }}"
-  seo_description: "{{ page.seo_description }}"
+  title: "{{ page.title | safe }}"
+  seo_description: "{{ page.seo_description | safe }}"
 layout: page.njk
 ---
 {{ page.content | safe }}

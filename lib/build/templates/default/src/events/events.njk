@@ -1,0 +1,12 @@
+---
+pagination:
+  data: events
+  size: 1
+  alias: event
+permalink: "/events/{{ event.slug }}/index.html"
+eleventyComputed:
+  title: "{{ event.title | safe }}"
+  seo_description: "{{ event.seo_description | safe }}"
+layout: event.njk
+---
+{{ event.content | safe }}
